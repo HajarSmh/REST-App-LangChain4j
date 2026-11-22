@@ -23,7 +23,7 @@ public class LlmClientForGuideTouristique {
         this.guideTouristique = AiServices.create(GuideTouristique.class, model);
     }
 
-    public String guide(String lieu) {
-        return guideTouristique.guide(lieu);
+    public String guide(String lieu, int nb) {
+        return guideTouristique.guide(lieu, nb);
     }
 }

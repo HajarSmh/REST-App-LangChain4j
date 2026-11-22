@@ -26,7 +26,22 @@ public class GuideTouristiqueResource {
     @Path("lieu/{ville_ou_pays}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response endroitsDeVisite(@PathParam("ville_ou_pays") String villeOuPays) {
-        String json = llmClient.guide(villeOuPays);
-        return Response.ok(json).build();
+        return Response.ok(llmClient.guide(villeOuPays, 2)).build();
+    }
+
+    /**
+     * Retourne un document JSON avec le nombre demandé d'endroits à visiter
+     * dans une ville ou un pays, et le prix moyen d'un repas.
+     *
+     * @param villeOuPays le nom de la ville ou du pays.
+     * @param nb          le nombre d'endroits à visiter, donné dans le chemin.
+     * @return la réponse du LLM, au format JSON.
+     */
+    @GET
+    @Path("lieu/{ville_ou_pays}/{nb}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response endroitsDeVisite(@PathParam("ville_ou_pays") String villeOuPays,
+                                     @PathParam("nb") int nb) {
+        return Response.ok(llmClient.guide(villeOuPays, nb)).build();
     }
 }
